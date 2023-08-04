@@ -17,7 +17,7 @@ export class StudentsRepo implements IStudentsRepo {
          .select("student.id as id")
 			.select(this.knexConnection.raw(`CONCAT(student.lastname, ' ', student.firstname, ' ', student.middlename) as fullname`))
 			.select("student.birthday as birthday")
-			.select("student_groups.record_book as record_book")
+			.select("students_groups.record_book as record_book")
 			.innerJoin("education.students_groups as students_groups", "student.id", "students_groups.id_student")
 			.where("students_groups.id_group", idGroup)
 			.orderBy("fullname");

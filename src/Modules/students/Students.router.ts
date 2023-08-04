@@ -1,3 +1,4 @@
+import { Application } from 'express' 
 import { StudentController } from "./controller";
 import { KnexConnection } from "../../../knexConnection";
 import { StudentService } from "./service";
@@ -9,6 +10,6 @@ const studentController = new StudentController(
 	)
 );
 
-export const StudentsRouter = (app: any, url: string) => {
+export const StudentsRouter = (app: Application, url: string) => {
 	app.get(`${url}/groupInfo`, studentController.getAllGroupInfo.bind(studentController));
 }

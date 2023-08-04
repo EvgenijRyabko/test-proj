@@ -1,6 +1,5 @@
 import express from 'express';
 import { MainRouter } from './shared/main.router';
-import 'dotenv/config';
 
 export const App = async () => {
 	const app = express();
