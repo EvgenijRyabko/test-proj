@@ -1,9 +1,13 @@
 import express from 'express';
+import { MainRouter } from './shared/main.router';
+import 'dotenv/config';
 
 export const App = async () => {
 	const app = express();
 
 	app.use(express.json());
+
+	MainRouter(app, '/test');
 
 	app.use((_, res) => {
 		res.status(404).json({

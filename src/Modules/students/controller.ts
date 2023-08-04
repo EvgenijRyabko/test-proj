@@ -14,7 +14,7 @@ export class StudentController implements IStudentsController {
 		const idGroup = <string>req.query.idGroup;
 
 		if (!idGroup) {
-			res.status('400').send("Не указан идентификатор департамента");
+			res.status(400).send("Не указан идентификатор департамента");
 		}
 
 		const pIdGroup = parseInt(idGroup);
