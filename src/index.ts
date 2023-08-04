@@ -4,7 +4,7 @@ const Start = () => {
     App()
     .then((app) => {
         app.listen(8001, async () => {
-            console.log("Сервер запущен на 8001");
+            console.log("Сервер запущен на http://localhost:8001");
         });
     });
 }
