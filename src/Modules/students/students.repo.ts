@@ -21,6 +21,8 @@ export class StudentsRepo implements IStudentsRepo {
       .where("studentGroup.idGroup = :idGroup", { idGroup })
       .getMany();
 
+    console.log(students);
+
     return students;
   }
 
