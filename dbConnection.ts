@@ -2,6 +2,10 @@ import 'dotenv/config';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { Student } from './src/shared/entities/students';
 import { StudentGroup } from './src/shared/entities/student_groups';
+import { StudyGroup } from './src/shared/entities/study_groups';
+import { Department } from './src/shared/entities/department';
+import { LevelEducation } from './src/shared/entities/level_education';
+import { FormEducation } from './src/shared/entities/form_education';
 
 export const DatabaseConnection = new DataSource(<DataSourceOptions>{
 	type: 'postgres',
@@ -10,7 +14,12 @@ export const DatabaseConnection = new DataSource(<DataSourceOptions>{
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
 	entities: [
-		Student, StudentGroup
+		// Education
+		Student, StudentGroup, StudyGroup,
+		LevelEducation, FormEducation,
+
+		// Pers
+		Department
 	],
 	synchronize: false,
 	logging: false
