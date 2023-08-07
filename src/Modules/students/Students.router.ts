@@ -1,12 +1,13 @@
 import { Application } from 'express' 
 import { StudentController } from "./controller";
 import { KnexConnection } from "../../../knexConnection";
+import { DatabaseConnection } from '../../../dbConnection';
 import { StudentService } from "./service";
 import { StudentsRepo } from "./students.repo";
 
 const studentController = new StudentController(
 	new StudentService(
-		new StudentsRepo(KnexConnection)
+		new StudentsRepo(KnexConnection, DatabaseConnection)
 	)
 );
 

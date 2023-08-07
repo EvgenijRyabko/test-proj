@@ -1,5 +1,7 @@
 import { Knex } from "knex";
+import { DataSource, Brackets } from "typeorm";
 import { StudentType, GroupType } from "../../shared/types/students.type";
+import { Student } from "../../shared/entities/students";
 
 export interface IStudentsRepo {
 	getAllStudentsByGroup(idGroup: number): Promise<StudentType[]>
@@ -9,6 +11,7 @@ export interface IStudentsRepo {
 export class StudentsRepo implements IStudentsRepo {
 	constructor(
 		private readonly knexConnection: Knex,
+		private readonly ormConnection: DataSource
 	){}
 
 	public async getAllStudentsByGroup(idGroup: number){
@@ -21,6 +24,15 @@ export class StudentsRepo implements IStudentsRepo {
 			.innerJoin("education.students_groups as students_groups", "student.id", "students_groups.id_student")
 			.where("students_groups.id_group", idGroup)
 			.orderBy("fullname");
+
+		const newStudents = await this.ormConnection.createQueryBuilder(Student, 'student')
+		.innerJoinAndSelect('student.studentGroups', 'studentGroup')
+		.where('studentGroup.idGroup = :idGroup', { idGroup })
+		.getMany();
+
+		console.log(newStudents)
+		console.log(students)
+
 
 		return students;	
 	}
